@@ -39,7 +39,30 @@ export interface Edge {
 }
 export interface Form {
     id: string;
+    name: string;
+    description: string;
+    is_reusable: boolean;
+    field_schema: FieldSchema;
+   
 }
+
+export interface FieldSchema {
+    type: string;
+    properties: Record<string, {
+      avantos_type: string;
+      title?: string;
+      type: string;
+      format?: string;
+      items?: {
+        enum: string[];
+        type: string;
+      };
+      enum?: any[];
+      uniqueItems?: boolean;
+    }>;
+    required: string[];
+  }
+  
 export interface Branch {
     id: string;
 }
