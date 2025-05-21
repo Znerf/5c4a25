@@ -1,3 +1,4 @@
+import { Blueprint } from "@/types/api/blueprint";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
 
 
@@ -8,7 +9,7 @@ export const BlueprintApi = createApi({
     }),
     tagTypes: ['Blueprint'],
     endpoints: (builder) => ({
-        getBlueprints: builder.query({
+        getBlueprints: builder.query <Blueprint,void>({
             query:() => "api/v1/123/actions/blueprints/bp_456/graph",
             providesTags: ['Blueprint'],
         }), 
