@@ -5,6 +5,7 @@ import { useState } from "react";
 export const NodeModal = ({ node, forms, data, setSelectedField, onClose}: NodeModalProps) => {
     if (!node) return null;
     const matchingForm: Form | undefined = forms.find(form => form.id === node.data.component_id);
+   
 
 
 
@@ -12,37 +13,48 @@ export const NodeModal = ({ node, forms, data, setSelectedField, onClose}: NodeM
     const getFormProperties = () => {
         if (!matchingForm?.field_schema?.properties) return [];
         
-        const value= Object.entries(matchingForm.field_schema.properties).map(([key]) => (key));
+        const value= Object.entries(matchingForm.field_schema.properties).map(([key]) => (key)); 
         const Knew = Object.fromEntries(value.map(key => [key, '']))
-    
-        const prerequisites = node.data.prerequisites || [];
-        console.log(prerequisites)
+
+        const queue: string[] = [];
+        const visited = new Set<string>();
         
-        const prerequisiteNodes = prerequisites.map(prereqId => {
-          const node = data.nodes.find(node => node.id === prereqId);
-          if (node) {
-            const form = forms.find(form => form.id === node.data.component_id);
-            if (form?.field_schema?.properties) {
-              const intersection = Object.keys(form.field_schema.properties).filter(key => 
-                Object.keys(Knew).includes(key)
-              );
-              
-              intersection.forEach(key => {
-                if (Knew[key] === '') {
-                    Knew[key] = ": "+node.data.name + " " + key;
-                }
-              });
-            }
-            return { node, form };
-          }
-          return null;
+        node.data.prerequisites.forEach(prereqId => {
+            visited.add(prereqId);
+            queue.push(prereqId);
         });
-    
-    
+        
+        while (queue.length > 0) {
+            const currentId = queue.shift();
+            const currentNode = data.nodes.find(node => node.id === currentId);
+            if (currentNode) {
+                const currentForm = forms.find(form => form.id === currentNode.data.component_id);
+                
+                if (currentForm?.field_schema?.properties) {
+                    const intersection = Object.keys(currentForm.field_schema.properties).filter(key => 
+                        Object.keys(Knew).includes(key)
+                    );
+                    
+                    intersection.forEach(key => {
+                        if (Knew[key] === '') {
+                            Knew[key] = ": " + currentNode.data.name + " " + key;
+                        }
+                    });
+                }
+                
+                const currentPrereqs = currentNode.data.prerequisites || [];
+                currentPrereqs.forEach(prereqId => {
+                    if (!visited.has(prereqId)) {
+                        visited.add(prereqId);
+                        queue.push(prereqId);
+                    }
+                });
+            }
+        }
         return Knew
     };
     const [k, setK] = useState(getFormProperties());
-
+    
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded-lg shadow-xl w-3/4">

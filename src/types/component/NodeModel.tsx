@@ -1,4 +1,4 @@
-import { Form, NodeData } from "../api/blueprint";
+import { Form, Node, NodeData } from "../api/blueprint";
 
 export interface NodeModalProps {
     node: Node | null ;
