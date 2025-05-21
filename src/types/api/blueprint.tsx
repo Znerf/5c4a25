@@ -10,9 +10,18 @@ export interface Blueprint {
     branches :  Branch[];
     triggers :  Trigger[];
 }
-
+export interface Position{
+    x: number;
+    y: number;
+}
 export interface Node {
-    id: string;
+    id : string;
+    type : string;
+    position : Position;
+    data : NodeData;
+}
+
+export interface NodeData {
 }
 export interface Edge {
     id: string;

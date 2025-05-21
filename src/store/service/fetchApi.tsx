@@ -1,5 +1,5 @@
 import { Blueprint } from "@/types/api/blueprint";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
 export const BlueprintApi = createApi({
