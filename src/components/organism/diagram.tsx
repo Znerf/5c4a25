@@ -14,6 +14,9 @@ export default function Diagram() {
     const [selectedNode, setSelectedNode] = useState<Node | null>(null);
     const [selectedField, setSelectedField] = useState<string | null>(null);
 
+    const [onField, onFieldSelect] = useState<{ key: string; value: any } | null>(null);
+
+
 
 
     useEffect(() => {
@@ -49,6 +52,9 @@ export default function Diagram() {
             />
             <FieldModal
                 field={selectedField}
+                nodes = {data.nodes}
+                forms={data.forms}
+                onFieldSelect = {() => onFieldSelect(null)}
                 onClose={() => setSelectedField(null)}
             />
         </div>
