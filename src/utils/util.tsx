@@ -4,9 +4,9 @@ export const getFormProperties = (
     node: Node,
     data: Blueprint,
     forms: Form[]
-) => {
+): { [key: string]: string } => {
     const matchingForm: Form | undefined = forms.find(form => form.id === node.data.component_id);
-    if (!matchingForm?.field_schema?.properties) return [];
+    if (!matchingForm?.field_schema?.properties) return {};
     
     const value = Object.entries(matchingForm.field_schema.properties).map(([key]) => (key)); 
     const Knew = Object.fromEntries(value.map(key => [key, '']))

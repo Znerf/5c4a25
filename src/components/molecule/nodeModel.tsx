@@ -27,7 +27,7 @@ export const NodeModal = ({ node, forms, data, setSelectedField, onClose}: NodeM
                             <div className="">
                                 {Object.entries(matchingForm.field_schema.properties).map(([key, field]) => (
                                     <div key={key} className=" float  px-4 py-2 justify-start bg-gray-200 m-2 w-full text-gray-700 rounded-md hover:bg-gray-300"
-                                        onClick={() => k[key] === '' ? setSelectedField(field.title) : null}
+                                        onClick={() =>(k[key] === '') ? setSelectedField(field.title|| '') : null}
                                     >
                                         <div className="font-medium text-black">{field.title || key} {k[key]}  
                                         {k[key] !== '' && ( 
