@@ -1,6 +1,4 @@
-import { Node } from "@/types/api/blueprint"
 import { NodeButtonProps } from "@/types/component/NodeButton"
-
 
 
 export const NodeButton = ({node, onClick}: NodeButtonProps) =>{
