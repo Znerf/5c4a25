@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { NodeButton } from "../molecule/nodeButton";
 
 import { Node } from "@/types/api/blueprint";
+import { NodeModal } from "../molecule/nodeModel";
 
 
 export default function Diagram() {
@@ -37,6 +38,10 @@ export default function Diagram() {
                     <NodeButton key= {node.id} node={node} onClick={handleNodeClick}/>
                 ))}
             </div>
+            <NodeModal 
+                node={selectedNode}
+                onClose={() => setSelectedNode(null)} 
+            />
         </div>
     );
 }
