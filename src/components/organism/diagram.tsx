@@ -6,11 +6,14 @@ import { NodeButton } from "../molecule/nodeButton";
 
 import { Node } from "@/types/api/blueprint";
 import { NodeModal } from "../molecule/nodeModel";
+import { FieldModal } from "../molecule/FieldModal";
 
 
 export default function Diagram() {
     const { data, error, isLoading } = useGetBlueprintsQuery("blueprintId");
     const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+    const [selectedField, setSelectedField] = useState<string | null>(null);
+
 
 
     useEffect(() => {
@@ -20,6 +23,7 @@ export default function Diagram() {
         if (error) {
             console.error("Error:", error);
         }
+        console.log(selectedField)
     })
     
     const handleNodeClick = (node: Node) => {
@@ -40,7 +44,12 @@ export default function Diagram() {
             <NodeModal 
                 node = {selectedNode}
                 forms = {data?.forms}
+                setSelectedField = {setSelectedField}
                 onClose={() => setSelectedNode(null)} 
+            />
+            <FieldModal
+                field={selectedField}
+                onClose={() => setSelectedField(null)}
             />
         </div>
     );

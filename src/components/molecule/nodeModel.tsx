@@ -1,7 +1,7 @@
 import { Form } from "@/types/api/blueprint";
 import { NodeModalProps } from "@/types/component/NodeModel";
 
-export const NodeModal = ({ node, forms , onClose}: NodeModalProps) => {
+export const NodeModal = ({ node, forms , setSelectedField, onClose}: NodeModalProps) => {
     if (!node) return null;
     const matchingForm: Form | undefined = forms.find(form => form.id === node.data.component_id);
 
@@ -23,7 +23,9 @@ export const NodeModal = ({ node, forms , onClose}: NodeModalProps) => {
                         <div className="border-b pb-2">
                             <div className="">
                                 {Object.entries(matchingForm.field_schema.properties).map(([key, field]) => (
-                                    <div className="px-4 py-2 justify-start bg-gray-200 m-2 w-full text-gray-700 rounded-md hover:bg-gray-300">
+                                    <div className="px-4 py-2 justify-start bg-gray-200 m-2 w-full text-gray-700 rounded-md hover:bg-gray-300"
+                                        onClick={()=> setSelectedField(field.title)}
+                                    >
                                         <p className="font-medium text-black">{field.title || key} </p>
                                     </div>
                                 ))}
