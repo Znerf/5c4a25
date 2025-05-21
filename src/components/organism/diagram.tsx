@@ -10,7 +10,6 @@ import { NodeModal } from "../molecule/nodeModel";
 
 export default function Diagram() {
     const { data, error, isLoading } = useGetBlueprintsQuery("blueprintId");
-
     const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
 
@@ -39,7 +38,8 @@ export default function Diagram() {
                 ))}
             </div>
             <NodeModal 
-                node={selectedNode}
+                node = {selectedNode}
+                forms = {data?.forms}
                 onClose={() => setSelectedNode(null)} 
             />
         </div>
