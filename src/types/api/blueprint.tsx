@@ -68,5 +68,6 @@ export interface Branch {
 }
 export interface Trigger {
     id: string;
+}
 
 

@@ -1,4 +1,4 @@
-import { Form } from "../api/blueprint";
+import { Form, Node } from "../api/blueprint";
 
 export interface FieldModalProps{
     field: string| null
