@@ -47,6 +47,7 @@ export default function Diagram() {
             <NodeModal 
                 node = {selectedNode}
                 forms = {data?.forms}
+                data={data}
                 setSelectedField = {setSelectedField}
                 onClose={() => setSelectedNode(null)} 
             />

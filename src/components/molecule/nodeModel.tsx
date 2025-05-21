@@ -1,9 +1,47 @@
 import { Form } from "@/types/api/blueprint";
 import { NodeModalProps } from "@/types/component/NodeModel";
+import { useState } from "react";
 
-export const NodeModal = ({ node, forms , setSelectedField, onClose}: NodeModalProps) => {
+export const NodeModal = ({ node, forms, data, setSelectedField, onClose}: NodeModalProps) => {
     if (!node) return null;
     const matchingForm: Form | undefined = forms.find(form => form.id === node.data.component_id);
+
+
+
+
+    const getFormProperties = () => {
+        if (!matchingForm?.field_schema?.properties) return [];
+        
+        const value= Object.entries(matchingForm.field_schema.properties).map(([key]) => (key));
+        const Knew = Object.fromEntries(value.map(key => [key, '']))
+    
+        const prerequisites = node.data.prerequisites || [];
+        console.log(prerequisites)
+        
+        const prerequisiteNodes = prerequisites.map(prereqId => {
+          const node = data.nodes.find(node => node.id === prereqId);
+          if (node) {
+            const form = forms.find(form => form.id === node.data.component_id);
+            if (form?.field_schema?.properties) {
+              const intersection = Object.keys(form.field_schema.properties).filter(key => 
+                Object.keys(Knew).includes(key)
+              );
+              
+              intersection.forEach(key => {
+                if (Knew[key] === '') {
+                    Knew[key] = ": "+node.data.name + " " + key;
+                }
+              });
+            }
+            return { node, form };
+          }
+          return null;
+        });
+    
+    
+        return Knew
+    };
+    const [k, setK] = useState(getFormProperties());
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -23,10 +61,14 @@ export const NodeModal = ({ node, forms , setSelectedField, onClose}: NodeModalP
                         <div className="border-b pb-2">
                             <div className="">
                                 {Object.entries(matchingForm.field_schema.properties).map(([key, field]) => (
-                                    <div className="px-4 py-2 justify-start bg-gray-200 m-2 w-full text-gray-700 rounded-md hover:bg-gray-300"
-                                        onClick={()=> setSelectedField(field.title)}
+                                    <div key={key} className=" float  px-4 py-2 justify-start bg-gray-200 m-2 w-full text-gray-700 rounded-md hover:bg-gray-300"
+                                        onClick={() => k[key] === '' ? setSelectedField(field.title) : null}
                                     >
-                                        <p className="font-medium text-black">{field.title || key} </p>
+                                        <div className="font-medium text-black">{field.title || key} {k[key]}  
+                                        {k[key] !== '' && ( 
+                                            <span className="flex cursor-pointer float-right" onClick={(e) => {e.stopPropagation(); setK({...k, [key]: ''}); }}>✕</span>
+                                        )}
+                                        </div>
                                     </div>
                                 ))}
                             </div>
