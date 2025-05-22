@@ -16,9 +16,6 @@ export default function Diagram() {
 
     const [onField, onFieldSelect] = useState<{ key: string; value: any } | null>(null);
 
-
-
-
     useEffect(() => {
         if (data) {
             console.log("Data:", data);

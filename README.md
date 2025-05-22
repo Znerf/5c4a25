@@ -1,6 +1,10 @@
-# Journey Builder React Challenge
+# Form Builder React Challenge
 
-A Next.js application for building and managing journey workflows with a visual interface.
+A Next.js application for building and managing form workflows with a visual interface.
+
+## Demo
+
+Watch the application demo: [Form Builder Demo](https://youtu.be/xxPvU8UIyuM)
 
 ## Prerequisites
 
@@ -68,9 +72,9 @@ src/
 
 - **app/**: Contains the main application pages and routing logic
 - **components/**: 
-  - **atom/**: Smallest, reusable components (buttons, inputs, etc.)
-  - **molecule/**: Components composed of multiple atoms (forms, cards, etc.)
-  - **organism/**: Complex components that combine molecules (modals, sections, etc.)
+  - **atom/**: Smallest, reusable components
+  - **molecule/**: Components composed of multiple atoms 
+  - **organism/**: Complex components that combine molecules
 - **store/**: Redux store setup and slice definitions
 - **types/**: TypeScript interfaces and type definitions
 - **utils/**: Helper functions and utilities
