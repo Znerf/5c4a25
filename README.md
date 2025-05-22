@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Journey Builder React Challenge
 
-## Getting Started
+A Next.js application for building and managing journey workflows with a visual interface.
 
-First, run the development server:
+## Prerequisites
 
+- Node.js (v14 or higher)
+- npm or yarn
+
+## Installation
+
+### Backend Setup
+
+1. Clone the backend repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/mosaic-avantos/frontendchallengeserver
+cd frontendchallengeserver
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies and start the server:
+```bash
+npm install
+npm run start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The backend server will start running on `http://localhost:3001` or other ports
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Frontend Setup
 
-## Learn More
+1. Clone this repository:
+```bash
+git clone https://github.com/Znerf/5c4a25
+cd 5c4a25
+```
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependencies:
+```bash
+npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Create a `.env` file in the root directory and add:
+```
+NEXT_PUBLIC_API_URL= <YOUR BACKEND URL>
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Start the development server:
+```bash
+npm run dev
+```
 
-## Deploy on Vercel
+The application will be available at `http://localhost:3000` or any other ports
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/                    # Next.js app directory
+├── components/             # React components
+│   ├── atom/              # Basic UI components
+│   ├── molecule/          # Composite components
+│   └── organism/          # Complex components
+├── store/                 # Redux store configuration
+├── types/                 # TypeScript type definitions
+└── utils/                 # Utility functions
+```
+
+### Folder Purposes
+
+- **app/**: Contains the main application pages and routing logic
+- **components/**: 
+  - **atom/**: Smallest, reusable components (buttons, inputs, etc.)
+  - **molecule/**: Components composed of multiple atoms (forms, cards, etc.)
+  - **organism/**: Complex components that combine molecules (modals, sections, etc.)
+- **store/**: Redux store setup and slice definitions
+- **types/**: TypeScript interfaces and type definitions
+- **utils/**: Helper functions and utilities
+
+## Tech Stack
+
+- **Frontend Framework**: Next.js
+- **Styling**: Tailwind CSS
+- **State Management**: Redux Toolkit (RTK Query)
+- **Type Safety**: TypeScript
+
+## Project Overview
+
+This project is a solution for the Journey Builder React Coding Challenge. It provides a visual interface for building and managing journey workflows, allowing users to:
+
+- Create and manage nodes in a workflow
+- Map fields between different nodes
+- Visualize the workflow structure
+- Handle prerequisites and dependencies
+
+## Challenge Details
+
+For more information about the challenge requirements and specifications, visit:
+[Journey Builder React Coding Challenge](https://fluttering-atmosphere-1b5.notion.site/Journey-Builder-React-Coding-Challenge-190d5fe264fa80cba39ec21afc6d42ec)
