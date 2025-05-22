@@ -10,20 +10,15 @@ import { FieldModal } from "../molecule/FieldModal";
 
 
 export default function Diagram() {
-    const { data, error, isLoading } = useGetBlueprintsQuery("blueprintId");
+    const { data, error, isLoading } = useGetBlueprintsQuery('blueprintId');
+
     const [selectedNode, setSelectedNode] = useState<Node | null>(null);
     const [selectedField, setSelectedField] = useState<string | null>(null);
 
-    const [onField, onFieldSelect] = useState<{ key: string; value: any } | null>(null);
-
     useEffect(() => {
-        if (data) {
-            console.log("Data:", data);
-        }
         if (error) {
             console.error("Error:", error);
         }
-        console.log(selectedField)
     })
     
     const handleNodeClick = (node: Node) => {
@@ -36,11 +31,14 @@ export default function Diagram() {
 
     return (
         <div >
+            {/* This is responsible for the Form Buttons */}
             <div> 
                 {data?.nodes.map((node:Node)=>(
                     <NodeButton key= {node.id} node={node} onClick={handleNodeClick}/>
                 ))}
             </div>
+
+            {/* This part when you click on the Forms */}
             <NodeModal 
                 node = {selectedNode}
                 forms = {data?.forms}
@@ -48,11 +46,12 @@ export default function Diagram() {
                 setSelectedField = {setSelectedField}
                 onClose={() => setSelectedNode(null)} 
             />
+
+            {/* This is when you click on the field inside the forms */}
             <FieldModal
                 field={selectedField}
                 nodes = {data.nodes}
                 forms={data.forms}
-                onFieldSelect = {() => onFieldSelect(null)}
                 onClose={() => setSelectedField(null)}
             />
         </div>

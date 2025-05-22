@@ -1,6 +1,6 @@
 import { FieldModalProps } from "@/types/component/FieldModel";
 
-export const FieldModal = ({ field,nodes, forms,onFieldSelect, onClose }: FieldModalProps) => {
+export const FieldModal = ({ field,nodes, forms, onClose }: FieldModalProps) => {
   if (!field) return null;
 
   return (
@@ -31,7 +31,6 @@ export const FieldModal = ({ field,nodes, forms,onFieldSelect, onClose }: FieldM
                               <div
                                 key={key}
                                 className=" p-2 pl-3 rounded mb-1 text-black hover:bg-gray-100 cursor-pointer"
-                                onClick={() => onFieldSelect(node.id, key, field)}
                               >
                                 {field.title || key}
                               </div>
