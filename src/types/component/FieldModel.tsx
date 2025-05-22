@@ -5,5 +5,4 @@ export interface FieldModalProps{
     onClose: () => void;
     forms: Form[];
     nodes: Node[];
-    onFieldSelect: (nodeId: string, fieldKey: string, field: any) => void;
 }

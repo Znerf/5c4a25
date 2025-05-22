@@ -5,7 +5,11 @@ import { useState } from "react";
 
 export const NodeModal = ({ node, forms, data, setSelectedField, onClose}: NodeModalProps) => {
     if (!node) return null;
+
+    // Uses getFormProperties to find and map form fields that are matched on the parent nodes
     const [k, setK] = useState(getFormProperties(node,data,forms));
+
+    // Find the matching form configuration for this node based on component_id
     const matchingForm: Form | undefined = forms.find(form => form.id === node.data.component_id);
     
     return (
